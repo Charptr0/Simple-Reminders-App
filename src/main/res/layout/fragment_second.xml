@@ -20,10 +20,10 @@
         android:id="@+id/reminderNameTxt"
         android:layout_width="271dp"
         android:layout_height="39dp"
-        android:text="Reminder Name"
+        android:text="@string/reminder_name"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
@@ -36,8 +36,9 @@
         android:layout_width="122dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
-        android:text="Quick Set"
-        android:textSize="14dp"
+        android:onClick="quickSetOpenDialog"
+        android:text="@string/quick_set"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.221"
@@ -50,11 +51,11 @@
         android:layout_width="127dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
-        android:text="Custom Options"
-        android:textSize="12dp"
+        android:text="@string/custom_options"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintHorizontal_bias="0.316"
         app:layout_constraintStart_toEndOf="@+id/quickSetBtn"
         app:layout_constraintTop_toBottomOf="@+id/timeTxT"
         app:layout_constraintVertical_bias="0.01" />
@@ -63,10 +64,10 @@
         android:id="@+id/timeTxT"
         android:layout_width="271dp"
         android:layout_height="39dp"
-        android:text="Time"
+        android:text="@string/time"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
@@ -76,43 +77,43 @@
 
     <RadioGroup
         android:id="@+id/priorityLevels"
-        android:layout_width="265dp"
-        android:layout_height="56dp"
+        android:layout_width="283dp"
+        android:layout_height="80dp"
         android:baselineAligned="true"
         android:orientation="horizontal"
         android:padding="15dp"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priorityLvlTxt"
-        app:layout_constraintVertical_bias="0.028"
+        app:layout_constraintVertical_bias="0.055"
         tools:ignore="MissingConstraints">
 
         <RadioButton
             android:id="@+id/priorityLowBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
-            android:paddingRight="10dp"
-            android:text="Low"
+            android:paddingEnd="10dp"
+            android:text="@string/low"
             android:textAlignment="center" />
 
         <RadioButton
             android:id="@+id/priorityMediumBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="Medium"
+            android:paddingEnd="10dp"
+            android:text="@string/medium"
             android:textAlignment="center" />
 
         <RadioButton
             android:id="@+id/priorityHighBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="82dp"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="High"
+            android:paddingEnd="10dp"
+            android:text="@string/high"
             android:textAlignment="center" />
     </RadioGroup>
 
@@ -120,10 +121,10 @@
         android:id="@+id/priorityLvlTxt"
         android:layout_width="271dp"
         android:layout_height="39dp"
-        android:text="Priority Level"
+        android:text="@string/priority_level"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
@@ -134,26 +135,28 @@
     <AutoCompleteTextView
         android:id="@+id/reminderNameTextArea"
         android:layout_width="209dp"
-        android:layout_height="44dp"
+        android:layout_height="52dp"
         android:textAlignment="textStart"
         app:layout_constraintBottom_toTopOf="@+id/priorityLvlTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reminderNameTxt"
-        app:layout_constraintVertical_bias="0.368" />
+        app:layout_constraintVertical_bias="0.368"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/confirmBtn"
         android:layout_width="157dp"
         android:layout_height="52dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         android:textColor="#FFFFFF"
         app:backgroundTint="@android:color/holo_blue_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textview_second"
-        app:layout_constraintVertical_bias="0.791" />
+        app:layout_constraintVertical_bias="0.844"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

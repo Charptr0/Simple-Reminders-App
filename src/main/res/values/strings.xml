@@ -9,4 +9,13 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="reminder_name">Reminder Name</string>
+    <string name="high">High</string>
+    <string name="custom_options">Custom Options</string>
+    <string name="quick_set">Quick Set</string>
+    <string name="confirm">Confirm</string>
+    <string name="medium">Medium</string>
+    <string name="priority_level">Priority Level</string>
+    <string name="time">Time</string>
+    <string name="low">Low</string>
 </resources>
