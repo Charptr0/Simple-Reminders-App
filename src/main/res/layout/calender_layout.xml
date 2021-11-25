@@ -5,13 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/confirmBtn2"
+        android:layout_width="157dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/confirm"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePickerBtn"
+        app:layout_constraintVertical_bias="0.851"
+        tools:ignore="TextContrastCheck" />
+
     <CalendarView
         android:id="@+id/calender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/timePickerBtn"
+        android:layout_width="165dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:onClick="timePickerHandler"
+        android:text="Choose a time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calender" />
+
+    <TextView
+        android:id="@+id/dateChooseTxt"
+        android:layout_width="259dp"
+        android:layout_height="45dp"
+        android:text="Choose a Date"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/calender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.492" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

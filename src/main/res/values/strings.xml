@@ -18,4 +18,5 @@
     <string name="priority_level">Priority Level</string>
     <string name="time">Time</string>
     <string name="low">Low</string>
+    <string name="advance_options">Advance Options</string>
 </resources>

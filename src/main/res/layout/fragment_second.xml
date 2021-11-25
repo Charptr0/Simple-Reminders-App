@@ -47,12 +47,12 @@
         app:layout_constraintVertical_bias="0.01" />
 
     <Button
-        android:id="@+id/customTimeBtn"
+        android:id="@+id/advanceOptionsBtn"
         android:layout_width="127dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
-        android:onClick="customOptionsBtnHandler"
-        android:text="@string/custom_options"
+        android:onClick="advanceOptionsBtnHandler"
+        android:text="@string/advance_options"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +131,7 @@
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textview_second"
-        app:layout_constraintVertical_bias="0.283" />
+        app:layout_constraintVertical_bias="0.292" />
 
     <AutoCompleteTextView
         android:id="@+id/reminderNameTextArea"
@@ -140,10 +140,9 @@
         android:textAlignment="textStart"
         app:layout_constraintBottom_toTopOf="@+id/priorityLvlTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reminderNameTxt"
-        app:layout_constraintVertical_bias="0.368"
+        app:layout_constraintVertical_bias="0.361"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button

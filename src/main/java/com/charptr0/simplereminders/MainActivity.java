@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.StrictMode;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -27,10 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
-    private CalendarView calendarView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(BuildConfig.DEBUG)
+            StrictMode.enableDefaults();
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
 
-    public void customOptionsBtnHandler(View view)
+    public void advanceOptionsBtnHandler(View view)
     {
         Intent intent = new Intent(MainActivity.this, CalenderActivity.class);
         startActivity(intent);
@@ -106,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = dialog.create();
         alert.setCanceledOnTouchOutside(true);
         alert.show();
+
+        alert.closeOptionsMenu();
     }
 
     @Override
