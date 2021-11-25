@@ -51,6 +51,7 @@
         android:layout_width="127dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
+        android:onClick="customOptionsBtnHandler"
         android:text="@string/custom_options"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/confirmBtn"

@@ -18,9 +18,8 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
+            Bundle savedInstanceState)
+    {
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
