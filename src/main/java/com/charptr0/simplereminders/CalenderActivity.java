@@ -5,15 +5,30 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+
+/**
+ *
+ * @author Chenhao Li
+ * @version 0.5
+ */
 public class CalenderActivity extends AppCompatActivity
 {
     private CalendarView calendarView;
+    private TextView dateAndTimeText;
+
+    private String dateAsString = "";
+    private String timeAsString = "12:00";
+
+    private final int DEFAULT_HR = 12;
+    private final int DEFAULT_MIN = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,33 +36,55 @@ public class CalenderActivity extends AppCompatActivity
             StrictMode.enableDefaults();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calender_layout);
-        calendarView = findViewById(R.id.calender);
 
+        //upon creating intent, set view to be at calender_layout.fxml
+        setContentView(R.layout.calender_layout);
+
+        //get the current month, day of month, and year
+        int currentDayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
+        int currentYear = Calendar.getInstance().get((Calendar.YEAR));
+
+        //default date
+        dateAsString = currentMonth + "/" + currentDayOfMonth + "/" +  currentYear;
+
+        //add reference for calender and text for date and time
+        calendarView = findViewById(R.id.calender);
+        dateAndTimeText = findViewById(R.id.dateAndTimeText);
+
+        //upon creating this intent, set the text to be the current date and time at 12:00pm
+        dateAndTimeText.setText((dateAsString + " at " +  timeAsString));
+
+        //for the calender view, add a listener for changing dates
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                System.out.printf("%d/%d/%d\n", month + 1, dayOfMonth, year);
+                //update variable
+                dateAsString = String.valueOf(month + 1) + "/" + dayOfMonth + "/" + year;
+                String dateAndTimeTogether = dateAsString + " at " + timeAsString;
+
+                //display the new date to user
+                dateAndTimeText.setText(dateAndTimeTogether);
             }
         });
-
     }
 
     public void timePickerHandler(View view)
     {
-        int defaultHour = 10;
-        int defaultMinute = 20;
-
+        //create a new time picker dialog
         TimePickerDialog timePickerDialog = new TimePickerDialog(CalenderActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            //add a listener for every time set
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                System.out.println(hourOfDay);
-                System.out.println(minute);
+                //update variable
+                timeAsString = hourOfDay + ":" + minute;
+
+                //display the new time to user
+                dateAndTimeText.setText(String.format("%s at %s", dateAsString, timeAsString));
             }
-        }, defaultHour, defaultMinute, false);
 
-        timePickerDialog.show();
+        }, DEFAULT_HR, DEFAULT_MIN, false);
 
-
+        timePickerDialog.show(); //show the dialog
     }
 }
