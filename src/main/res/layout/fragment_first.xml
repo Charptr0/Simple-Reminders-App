@@ -20,6 +20,7 @@
         android:id="@+id/button_first"
         android:layout_width="68dp"
         android:layout_height="80dp"
+        android:onClick="creationButtonHandler"
         android:shadowRadius="50"
         android:text="+"
         android:textSize="40dp"

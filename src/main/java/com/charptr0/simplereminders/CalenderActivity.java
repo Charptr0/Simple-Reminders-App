@@ -40,13 +40,8 @@ public class CalenderActivity extends AppCompatActivity
         //upon creating intent, set view to be at calender_layout.fxml
         setContentView(R.layout.calender_layout);
 
-        //get the current month, day of month, and year
-        int currentDayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-        int currentYear = Calendar.getInstance().get((Calendar.YEAR));
-
-        //default date
-        dateAsString = currentMonth + "/" + currentDayOfMonth + "/" +  currentYear;
+        //set default date to be today
+        dateAsString = CurrentDate.getDateFormatted();
 
         //add reference for calender and text for date and time
         calendarView = findViewById(R.id.calender);

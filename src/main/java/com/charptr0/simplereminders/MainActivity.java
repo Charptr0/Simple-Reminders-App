@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,78 +40,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
 
-    public void advanceOptionsBtnHandler(View view)
-    {
-        Intent intent = new Intent(MainActivity.this, CalenderActivity.class);
+    public void creationButtonHandler(View view){
+        Intent intent = new Intent(MainActivity.this, CreationActivity.class);
         startActivity(intent);
     }
 
-    public void quickSetOpenDialog(View view)
-    {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-        dialog.setTitle("Choose a time slot");
-        dialog.setPositiveButton("Done", null);
 
-        String[] preSetTimes = {"1 minute from now","5 minutes from now","10 minutes from now",
-                "15 minutes from now","30 minutes from now", "1 hour from now",
-                "8 hours from now", "12 hours from now", "1 day from now"};
 
-        int checkedTime = 5;
-
-        dialog.setSingleChoiceItems(preSetTimes, checkedTime, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        Toast.makeText(MainActivity.this, "1 minutes from now", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-                        Toast.makeText(MainActivity.this, "5 minutes from now", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(MainActivity.this, "10 minutes from now", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 3:
-                        Toast.makeText(MainActivity.this, "15 minutes from now", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 4:
-                    Toast.makeText(MainActivity.this, "30 minutes from now", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case 5:
-                        Toast.makeText(MainActivity.this, "1 hour from now", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case 6:
-                        Toast.makeText(MainActivity.this, "8 hours from now", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case 7:
-                        Toast.makeText(MainActivity.this, "12 hours from now", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case 8:
-                        Toast.makeText(MainActivity.this, "1 day from now", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-        });
-
-        AlertDialog alert = dialog.create();
-        alert.setCanceledOnTouchOutside(true);
-        alert.show();
-
-        alert.closeOptionsMenu();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

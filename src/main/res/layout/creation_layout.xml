@@ -3,33 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SecondFragment">
-
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/reminderNameTxt"
-        android:layout_width="271dp"
-        android:layout_height="39dp"
+        android:layout_width="255dp"
+        android:layout_height="38dp"
         android:text="@string/reminder_name"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textview_second"
-        app:layout_constraintVertical_bias="0.107" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064" />
 
     <Button
         android:id="@+id/quickSetBtn"
@@ -56,25 +44,23 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.316"
+        app:layout_constraintHorizontal_bias="0.367"
         app:layout_constraintStart_toEndOf="@+id/quickSetBtn"
         app:layout_constraintTop_toBottomOf="@+id/timeTxT"
-        app:layout_constraintVertical_bias="0.01" />
+        app:layout_constraintVertical_bias="0.006" />
 
     <TextView
         android:id="@+id/timeTxT"
         android:layout_width="271dp"
         android:layout_height="39dp"
+        android:layout_marginTop="20dp"
         android:text="@string/time"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priorityLevels"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintTop_toBottomOf="@+id/priorityLevels" />
 
     <RadioGroup
         android:id="@+id/priorityLevels"
@@ -86,10 +72,9 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/confirmBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/priorityLvlTxt"
-        app:layout_constraintVertical_bias="0.055"
+        app:layout_constraintVertical_bias="0.053"
         tools:ignore="MissingConstraints">
 
         <RadioButton
@@ -122,16 +107,14 @@
         android:id="@+id/priorityLvlTxt"
         android:layout_width="271dp"
         android:layout_height="39dp"
+        android:layout_marginTop="132dp"
         android:text="@string/priority_level"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textview_second"
-        app:layout_constraintVertical_bias="0.292" />
+        app:layout_constraintTop_toBottomOf="@+id/reminderNameTxt" />
 
     <AutoCompleteTextView
         android:id="@+id/reminderNameTextArea"
@@ -142,13 +125,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/reminderNameTxt"
-        app:layout_constraintVertical_bias="0.361"
+        app:layout_constraintVertical_bias="0.488"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/confirmBtn"
         android:layout_width="157dp"
         android:layout_height="52dp"
+        android:layout_marginBottom="64dp"
         android:text="@string/confirm"
         android:textColor="#FFFFFF"
         app:backgroundTint="@android:color/holo_blue_dark"
@@ -173,6 +157,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeTxT"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.325" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
