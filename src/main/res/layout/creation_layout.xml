@@ -132,14 +132,14 @@
         android:id="@+id/confirmBtn"
         android:layout_width="157dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="40dp"
+        android:onClick="confirmButtonHandler"
         android:text="@string/confirm"
         android:textColor="#FFFFFF"
         app:backgroundTint="@android:color/holo_blue_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.844"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -156,6 +156,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timeTxT"
-        app:layout_constraintVertical_bias="0.325" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

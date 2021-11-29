@@ -3,7 +3,7 @@ package com.charptr0.simplereminders;
 import java.util.Calendar;
 
 /**
- * DateTime - Gets the current date in MM/DD/YY format
+ * CurrentDate - Gets the current date in MM/DD/YY format
  *
  * @author Chenhao Li
  * @version 1.0
@@ -25,7 +25,7 @@ public class CurrentDate
     }
 
     public static String getDateFormatted() {
-        return getDayOfMonth() + "/" + getMonth() + "/" + getYear();
+        return getMonth() + "/" + getDayOfMonth() + "/" + getYear();
     }
 
 }

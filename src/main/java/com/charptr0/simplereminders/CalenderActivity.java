@@ -1,6 +1,7 @@
 package com.charptr0.simplereminders;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -81,5 +82,18 @@ public class CalenderActivity extends AppCompatActivity
         }, DEFAULT_HR, DEFAULT_MIN, false);
 
         timePickerDialog.show(); //show the dialog
+    }
+
+    public void onConfirmHandler(View view)
+    {
+        Intent intent = new Intent();
+        intent.putExtra("date_and_time", (dateAsString + " at " + timeAsString));
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
