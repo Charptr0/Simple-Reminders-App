@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
             Reminder r = data.getParcelableExtra("reminder");
             listOfReminders.add(r);
-
-            System.out.println(listOfReminders.size());
         }
     }
 }

@@ -4,7 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,8 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CreationActivity extends AppCompatActivity
 {
     private TextView dateAndTimeText;
-
-    private String userReminderName = "Untitled Reminder";
+    private AutoCompleteTextView reminderNameView;
+    private RadioGroup selectedPriority;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +27,11 @@ public class CreationActivity extends AppCompatActivity
         setContentView(R.layout.creation_layout);
 
         dateAndTimeText = findViewById(R.id.dateAndTimeText_main);
+
+        reminderNameView = findViewById(R.id.reminderNameTextArea);
+
+        selectedPriority = findViewById(R.id.priorityLevels);
+
     }
 
     /**
@@ -130,11 +139,59 @@ public class CreationActivity extends AppCompatActivity
         alert.show();
     }
 
+    /**
+     * Get the user input from the textview as a string
+     *
+     * @return the reminder name that the user entered
+     */
+    private String getUserEnteredReminderName()
+    {
+        //get the string from the text view
+        String reminderName = reminderNameView.getText().toString();
+
+        //if the text view is empty, then change to a default value
+        if(reminderName.isEmpty()) return "Untitled Reminder";
+
+        //if not empty, return the string that is inside the text view
+        return reminderName;
+    }
+
+    /**
+     * Get the string from the pressed radio button
+     *
+     * @return the text from the pressed radio button
+     */
+    private String getUserEnteredPriorityLevel()
+    {
+        //grab the id of pressed radio button
+        int id = selectedPriority.getCheckedRadioButtonId();
+
+        //match the radio button object to id
+        RadioButton buttonChecked = findViewById(id);
+
+        //return its text
+        return buttonChecked.getText().toString();
+    }
+
+    /**
+     * Handles the events when the confirm button is pressed
+     *
+     * Save the reminder name and priority level that the user entered and pass it back to the main activity
+     */
     public void confirmButtonHandler(View view)
     {
+        //get attributes from user inputs
+        String reminderName = getUserEnteredReminderName();
+        String priorityLevel = getUserEnteredPriorityLevel();
+
+        //pass the information back to the main activity
         Intent intent = new Intent();
-        intent.putExtra("reminder", new Reminder());
+
+        //create a new reminder with the user inputs
+        intent.putExtra("reminder", new Reminder(reminderName, priorityLevel, ""));
         setResult(RESULT_OK, intent);
+
+        //destroy the current intent
         finish();
     }
 
