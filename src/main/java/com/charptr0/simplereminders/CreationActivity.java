@@ -15,6 +15,8 @@ public class CreationActivity extends AppCompatActivity
 {
     private TextView dateAndTimeText;
 
+    private String userReminderName = "Untitled Reminder";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +132,9 @@ public class CreationActivity extends AppCompatActivity
 
     public void confirmButtonHandler(View view)
     {
+        Intent intent = new Intent();
+        intent.putExtra("reminder", new Reminder());
+        setResult(RESULT_OK, intent);
         finish();
     }
 
