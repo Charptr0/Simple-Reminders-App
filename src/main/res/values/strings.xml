@@ -19,4 +19,6 @@
     <string name="advance_options">Advance Options</string>
     <string name="there_are_no_reminders">There are no reminders</string>
     <string name="add_reminder_btn">+</string>
+    <string name="untitled_reminder">Untitled Reminder</string>
+    <string name="priority_medium">Priority: Medium</string>
 </resources>

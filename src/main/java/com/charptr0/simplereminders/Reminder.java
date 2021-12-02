@@ -60,17 +60,28 @@ public class Reminder implements Parcelable {
         }
     };
 
+    /**
+     * Get the name of the reminder
+     * @return the name of the reminder
+     */
     public String getName() {
         return NAME;
     }
 
+    /**
+     * Get the priority level of the reminder
+     * @return "Low", "Medium" or "High"
+     */
     public String getPriorityLevel() {
         return PRIORITY_LEVEL;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Reminder Name: %s\nPriority Level: %s\nTime: %s", this.NAME, this.PRIORITY_LEVEL, this.TIME);
+    /**
+     * Get the time of the reminder
+     * @return the time in MM/DD/YY at HH::MM format
+     */
+    public String getTime() {
+        return TIME;
     }
 
     @Override
