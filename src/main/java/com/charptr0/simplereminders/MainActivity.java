@@ -33,21 +33,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         noReminderText = findViewById(R.id.noReminderText);
+
+        //recycler view and adapter init
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         adapter = new ReminderAdapter(this, listOfReminders);
-
         recyclerView.setAdapter(adapter);
 
         if(!listOfReminders.isEmpty()) noReminderText.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * onClick handler for the creation button
+     *
+     * Opens a new intent for the creation of a new reminder
+     */
     public void creationButtonHandler(View view){
         Intent intent = new Intent(MainActivity.this, CreationActivity.class);
         startActivityForResult(intent, 1);
     }
 
+
+    /**
+     * Get the data from the creationActivity
+     * All reminders send back are valid reminder, therefore is added to the array list and database
+     */
     @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -55,16 +65,17 @@ public class MainActivity extends AppCompatActivity {
         
         if(requestCode == 1 && resultCode == RESULT_OK)
         {
+            //make sure data is not null
             assert data != null;
 
             Reminder r = data.getParcelableExtra("reminder");
             listOfReminders.add(r);
 
+            //update the adapter and recycler view
             adapter.notifyDataSetChanged();
 
         }
 
         if(!listOfReminders.isEmpty()) noReminderText.setVisibility(View.INVISIBLE);
-
     }
 }

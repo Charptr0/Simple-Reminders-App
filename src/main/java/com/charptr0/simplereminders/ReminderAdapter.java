@@ -1,9 +1,11 @@
 package com.charptr0.simplereminders;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +56,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
         private TextView reminderNameTxt;
         private TextView reminderPriorityLevelTxt;
         private TextView reminderTimeTxt;
+        private LinearLayout linearLayout;
 
         public ReminderHolder(View view)
         {
@@ -62,15 +65,35 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
             reminderNameTxt = view.findViewById(R.id.reminderNameText);
             reminderPriorityLevelTxt = view.findViewById(R.id.reminderPriorityText);
             reminderTimeTxt = view.findViewById(R.id.reminderTimeText);
+            linearLayout = view.findViewById(R.id.linearLayout);
+        }
+
+        private void updateLayoutColor(String reminder_priority)
+        {
+            if(reminder_priority.equals("Medium Priority")) return;
+
+            switch (reminder_priority)
+            {
+                case "Low Priority":
+                    linearLayout.setBackgroundColor(Color.GREEN);
+                    break;
+
+                case "High Priority":
+                    linearLayout.setBackgroundColor(Color.RED);
+                    break;
+
+                default: break;
+            }
 
         }
 
-        void setDetails(Reminder reminder)
+        public void setDetails(Reminder reminder)
         {
             reminderNameTxt.setText(reminder.getName());
             reminderPriorityLevelTxt.setText(reminder.getPriorityLevel());
             reminderTimeTxt.setText(reminder.getTime());
-        }
 
+            updateLayoutColor(reminder.getPriorityLevel());
+        }
     }
 }

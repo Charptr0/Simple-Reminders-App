@@ -13,8 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Calendar;
-
 /**
  *
  * @author Chenhao Li
@@ -42,14 +40,14 @@ public class CalenderActivity extends AppCompatActivity
         setContentView(R.layout.calender_layout);
 
         //set default date to be today
-        dateAsString = CurrentDate.getDateFormatted();
+        dateAsString = CurrentDateAndTime.getCurrentDateAndTimeFormatted();
 
         //add reference for calender and text for date and time
         calendarView = findViewById(R.id.calender);
         dateAndTimeText = findViewById(R.id.dateAndTimeText);
 
         //upon creating this intent, set the text to be the current date and time at 12:00pm
-        dateAndTimeText.setText((dateAsString + " at " +  timeAsString));
+        dateAndTimeText.setText((dateAsString));
 
         //for the calender view, add a listener for changing dates
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {

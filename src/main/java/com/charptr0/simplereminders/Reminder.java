@@ -26,15 +26,6 @@ public class Reminder implements Parcelable {
      */
     private final String TIME;
 
-    /**
-     * Default constructor (FOR TESTING)
-     */
-    public Reminder() {
-        this.NAME = "Untitled Reminder";
-        this.PRIORITY_LEVEL = "Medium";
-        this.TIME = "";
-    }
-
     public Reminder(String name, String priority_level, String time)
     {
         this.NAME = name;

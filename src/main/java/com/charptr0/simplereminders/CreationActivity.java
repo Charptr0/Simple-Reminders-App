@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.RadioButton;
@@ -14,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
 
 public class CreationActivity extends AppCompatActivity
 {
@@ -88,40 +89,53 @@ public class CreationActivity extends AppCompatActivity
         int checkedTime = 5;
 
         //dialog button listener
-        dialog.setSingleChoiceItems(preSetTimes, checkedTime, new DialogInterface.OnClickListener() {
+        dialog.setSingleChoiceItems(preSetTimes, 10, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                String dateAndTime = CurrentDateAndTime.getCurrentDateAndTimeFormatted();
+
                 switch (which) {
                     case 0:
                         Toast.makeText(CreationActivity.this, "1 minutes from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(60);
                         break;
                     case 1:
                         Toast.makeText(CreationActivity.this, "5 minutes from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(300);
                         break;
                     case 2:
                         Toast.makeText(CreationActivity.this, "10 minutes from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(600);
                         break;
                     case 3:
                         Toast.makeText(CreationActivity.this, "15 minutes from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(900);
+
                         break;
                     case 4:
                         Toast.makeText(CreationActivity.this, "30 minutes from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(1800);
                         break;
 
                     case 5:
                         Toast.makeText(CreationActivity.this, "1 hour from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(3600);
                         break;
 
                     case 6:
                         Toast.makeText(CreationActivity.this, "8 hours from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(28800);
                         break;
 
                     case 7:
                         Toast.makeText(CreationActivity.this, "12 hours from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(43200);
                         break;
 
                     case 8:
                         Toast.makeText(CreationActivity.this, "1 day from now", Toast.LENGTH_SHORT).show();
+                        dateAndTime = FutureDateAndTime.getFutureTime(86400);
                         break;
 
                     default:
@@ -129,7 +143,7 @@ public class CreationActivity extends AppCompatActivity
                 }
 
                 //update the date and time text
-                dateAndTimeText.setText((CurrentDate.getDateFormatted() + " at " + CurrentTime.getCurrentTime()));
+                dateAndTimeText.setText(dateAndTime);
             }
         });
 
@@ -170,7 +184,22 @@ public class CreationActivity extends AppCompatActivity
         RadioButton buttonChecked = findViewById(id);
 
         //return its text
-        return buttonChecked.getText().toString();
+        return String.format("%s Priority", buttonChecked.getText().toString());
+    }
+
+    private String getUserEnteredTime()
+    {
+        return dateAndTimeText.getText().toString();
+    }
+
+    private void showInvalidTimeErrDialog()
+    {
+        new AlertDialog.Builder(this)
+                .setTitle("Your input time is not valid")
+                .setMessage("Please choose a appropriate time")
+                .setPositiveButton(android.R.string.ok, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     /**
@@ -178,17 +207,23 @@ public class CreationActivity extends AppCompatActivity
      *
      * Save the reminder name and priority level that the user entered and pass it back to the main activity
      */
-    public void confirmButtonHandler(View view)
-    {
+    public void confirmButtonHandler(View view) {
         //get attributes from user inputs
         String reminderName = getUserEnteredReminderName();
         String priorityLevel = getUserEnteredPriorityLevel();
+        String reminderTime = getUserEnteredTime();
+
+        if(reminderTime.equals(""))
+        {
+            showInvalidTimeErrDialog();
+            return;
+        }
 
         //pass the information back to the main activity
         Intent intent = new Intent();
 
         //create a new reminder with the user inputs
-        intent.putExtra("reminder", new Reminder(reminderName, priorityLevel, ""));
+        intent.putExtra("reminder", new Reminder(reminderName, priorityLevel, reminderTime));
         setResult(RESULT_OK, intent);
 
         //destroy the current intent
