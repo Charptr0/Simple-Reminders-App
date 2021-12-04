@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +43,32 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         if(!listOfReminders.isEmpty()) noReminderText.setVisibility(View.INVISIBLE);
+
+        //gesture handler
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                int position = viewHolder.getAdapterPosition();
+
+                //if a right swipe gesture is made, delete the current reminder
+                if(direction == ItemTouchHelper.RIGHT)
+                {
+                    listOfReminders.remove(position);
+                    adapter.notifyItemRemoved(position);
+                }
+
+                //if the list is empty, notify the user there are no reminder
+                if(listOfReminders.isEmpty()) noReminderText.setVisibility(View.VISIBLE);
+            }
+        });
+
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     /**
