@@ -23,11 +23,10 @@
 
     <CalendarView
         android:id="@+id/calender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_width="327dp"
+        android:layout_height="304dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,26 +34,43 @@
         android:id="@+id/timePickerBtn"
         android:layout_width="165dp"
         android:layout_height="52dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="80dp"
         android:onClick="timePickerHandler"
-        android:text="Choose a time"
+        android:text="Time"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calender" />
 
     <TextView
         android:id="@+id/dateChooseTxt"
-        android:layout_width="259dp"
-        android:layout_height="45dp"
+        android:layout_width="248dp"
+        android:layout_height="29dp"
         android:text="Choose a Date"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textSize="30dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/calender"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.492" />
+        app:layout_constraintVertical_bias="0.53" />
+
+    <TextView
+        android:id="@+id/timeChooseTxt"
+        android:layout_width="248dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="20dp"
+        android:text="Choose a Time"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/timePickerBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/dateAndTimeText"
@@ -65,7 +81,9 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/confirmAdanceDateBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePickerBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/timePickerBtn"
+        app:layout_constraintVertical_bias="0.619" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
