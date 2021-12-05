@@ -2,10 +2,13 @@ package com.charptr0.simplereminders;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -36,6 +39,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public ArrayList<Reminder> getAll()
+    {
+        ArrayList<Reminder>listOfReminders = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String getAllStatement = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(getAllStatement, null);
+        cursor.moveToFirst();
+
+        if(cursor.getCount() == 0)
+        {
+            db.close();
+            cursor.close();
+            return listOfReminders;
+        }
+
+        int colIndex;
+
+        while(!cursor.isAfterLast())
+        {
+            colIndex = cursor.getColumnIndex(COLUMN_1);
+            String reminderName = cursor.getString(colIndex);
+
+            colIndex = cursor.getColumnIndex(COLUMN_2);
+            String reminderPriority = cursor.getString(colIndex);
+
+            colIndex = cursor.getColumnIndex(COLUMN_3);
+            String reminderTime = cursor.getString(colIndex);
+
+            colIndex = cursor.getColumnIndex(COLUMN_5);
+            String reminderID = cursor.getString(colIndex);
+
+            listOfReminders.add(new Reminder(reminderName, reminderPriority, reminderTime, reminderID));
+
+            cursor.moveToNext();
+        }
+
+        db.close();
+        cursor.close();
+
+        return listOfReminders;
     }
 
     public boolean addReminder(Reminder reminder)

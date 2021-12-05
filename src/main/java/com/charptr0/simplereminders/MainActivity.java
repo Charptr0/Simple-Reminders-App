@@ -2,7 +2,6 @@ package com.charptr0.simplereminders;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ReminderAdapter(this, listOfReminders);
         recyclerView.setAdapter(adapter);
 
+        //add a reference to the database
         databaseHelper = new DatabaseHelper(MainActivity.this);
-
-        if(!listOfReminders.isEmpty()) noReminderText.setVisibility(View.INVISIBLE);
+        getRemindersFromDatabase(); //get all previous entries from the database
 
         //gesture handler
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
@@ -72,6 +71,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
         itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    /**
+     * Get all entries that are inside of the database and display it to the user
+     */
+    @SuppressLint("NotifyDataSetChanged")
+    private void getRemindersFromDatabase()
+    {
+        //grab all entries
+        ArrayList<Reminder>temp = databaseHelper.getAll();
+
+        //entries are not empty
+        if(!temp.isEmpty())
+        {
+            noReminderText.setVisibility(View.INVISIBLE);
+
+            //add every single entry into the main list and update the adapter
+            for(Reminder r : temp)
+            {
+                this.listOfReminders.add(r);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     /**

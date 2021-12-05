@@ -223,7 +223,7 @@ public class CreationActivity extends AppCompatActivity
         Intent intent = new Intent();
 
         //create a new reminder with the user inputs
-        intent.putExtra("reminder", new Reminder(reminderName, priorityLevel, reminderTime));
+        intent.putExtra("reminder", new Reminder(reminderName, priorityLevel, reminderTime, String.valueOf(CurrentDateAndTime.getUnixTime())));
         setResult(RESULT_OK, intent);
 
         //destroy the current intent

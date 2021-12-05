@@ -26,17 +26,21 @@ public class Reminder implements Parcelable {
      */
     private final String TIME;
 
-    public Reminder(String name, String priority_level, String time)
+    private final long ID;
+
+    public Reminder(String name, String priority_level, String time, String id)
     {
         this.NAME = name;
         this.PRIORITY_LEVEL = priority_level;
         this.TIME = time;
+        this.ID = Long.parseLong(id);
     }
 
     protected Reminder(Parcel in) {
         NAME = in.readString();
         PRIORITY_LEVEL = in.readString();
         TIME = in.readString();
+        ID = in.readLong();
     }
 
     public static final Creator<Reminder> CREATOR = new Creator<Reminder>() {
@@ -85,6 +89,10 @@ public class Reminder implements Parcelable {
         }
 
         return 0;
+    }
+
+    public long getId() {
+        return ID;
     }
 
     @Override
