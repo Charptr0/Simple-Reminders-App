@@ -184,7 +184,7 @@ public class CreationActivity extends AppCompatActivity
         RadioButton buttonChecked = findViewById(id);
 
         //return its text
-        return String.format("%s Priority", buttonChecked.getText().toString());
+        return buttonChecked.getText().toString();
     }
 
     private String getUserEnteredTime()

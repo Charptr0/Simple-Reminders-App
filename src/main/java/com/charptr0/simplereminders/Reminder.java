@@ -75,6 +75,18 @@ public class Reminder implements Parcelable {
         return TIME;
     }
 
+    public int getPriorityId()
+    {
+        switch (this.PRIORITY_LEVEL)
+        {
+            case "Low" : return 1;
+            case "Medium" : return 2;
+            case "High" : return 3;
+        }
+
+        return 0;
+    }
+
     @Override
     public int describeContents() {
         return 0;

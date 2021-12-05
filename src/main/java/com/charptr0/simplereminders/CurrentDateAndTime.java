@@ -14,6 +14,11 @@ public class CurrentDateAndTime
 {
     private CurrentDateAndTime() {}
 
+    public static long getUnixTime()
+    {
+        return System.currentTimeMillis() / 1000L;
+    }
+
     /**
      * Get the current time
      * @return HH:MM format

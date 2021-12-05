@@ -2,6 +2,7 @@ package com.charptr0.simplereminders;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.StrictMode;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView noReminderText;
     private RecyclerView recyclerView;
     private ReminderAdapter adapter;
+
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ReminderAdapter(this, listOfReminders);
         recyclerView.setAdapter(adapter);
+
+        databaseHelper = new DatabaseHelper(MainActivity.this);
 
         if(!listOfReminders.isEmpty()) noReminderText.setVisibility(View.INVISIBLE);
 
@@ -102,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             //update the adapter and recycler view
             adapter.notifyDataSetChanged();
 
+            databaseHelper.addReminder(r);
         }
 
         if(!listOfReminders.isEmpty()) noReminderText.setVisibility(View.INVISIBLE);

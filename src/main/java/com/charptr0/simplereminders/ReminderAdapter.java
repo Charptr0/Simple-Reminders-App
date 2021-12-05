@@ -70,15 +70,15 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
 
         private void updateLayoutColor(String reminder_priority)
         {
-            if(reminder_priority.equals("Medium Priority")) return;
+            if(reminder_priority.equals("Medium")) return;
 
             switch (reminder_priority)
             {
-                case "Low Priority":
+                case "Low":
                     linearLayout.setBackgroundColor(Color.GREEN);
                     break;
 
-                case "High Priority":
+                case "High":
                     linearLayout.setBackgroundColor(Color.RED);
                     break;
 
@@ -90,7 +90,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
         public void setDetails(Reminder reminder)
         {
             reminderNameTxt.setText(reminder.getName());
-            reminderPriorityLevelTxt.setText(reminder.getPriorityLevel());
+            reminderPriorityLevelTxt.setText(("Priority: " + reminder.getPriorityLevel()));
             reminderTimeTxt.setText(reminder.getTime());
 
             updateLayoutColor(reminder.getPriorityLevel());
