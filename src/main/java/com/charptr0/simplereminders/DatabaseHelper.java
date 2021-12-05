@@ -41,6 +41,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void deleteEntry(long id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String deleteEntryStatement = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_5 + " is " + id;
+
+        db.execSQL(deleteEntryStatement);
+        db.close();
+    }
+
     public ArrayList<Reminder> getAll()
     {
         ArrayList<Reminder>listOfReminders = new ArrayList<>();

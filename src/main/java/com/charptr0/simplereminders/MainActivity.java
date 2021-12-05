@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 //if a right swipe gesture is made, delete the current reminder
                 if(direction == ItemTouchHelper.RIGHT)
                 {
+                    databaseHelper.deleteEntry(listOfReminders.get(position).getId());
                     listOfReminders.remove(position);
                     adapter.notifyItemRemoved(position);
+                    Toast.makeText(MainActivity.this, "The task has been successfully deleted", Toast.LENGTH_SHORT).show();
                 }
 
                 //if the list is empty, notify the user there are no reminder
