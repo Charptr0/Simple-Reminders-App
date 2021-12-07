@@ -97,44 +97,34 @@ public class CreationActivity extends AppCompatActivity
 
                 switch (which) {
                     case 0:
-                        Toast.makeText(CreationActivity.this, "1 minutes from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(60);
                         break;
                     case 1:
-                        Toast.makeText(CreationActivity.this, "5 minutes from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(300);
                         break;
                     case 2:
-                        Toast.makeText(CreationActivity.this, "10 minutes from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(600);
                         break;
                     case 3:
-                        Toast.makeText(CreationActivity.this, "15 minutes from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(900);
-
                         break;
                     case 4:
-                        Toast.makeText(CreationActivity.this, "30 minutes from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(1800);
                         break;
 
                     case 5:
-                        Toast.makeText(CreationActivity.this, "1 hour from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(3600);
                         break;
 
                     case 6:
-                        Toast.makeText(CreationActivity.this, "8 hours from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(28800);
                         break;
 
                     case 7:
-                        Toast.makeText(CreationActivity.this, "12 hours from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(43200);
                         break;
 
                     case 8:
-                        Toast.makeText(CreationActivity.this, "1 day from now", Toast.LENGTH_SHORT).show();
                         dateAndTime = FutureDateAndTime.getFutureTime(86400);
                         break;
 
