@@ -25,6 +25,8 @@
         <activity android:name=".CreationActivity" android:label="Create a Reminder">
         </activity>
 
+        <receiver android:name=".ReminderBroadcaster"/>
+
     </application>
 
 </manifest>

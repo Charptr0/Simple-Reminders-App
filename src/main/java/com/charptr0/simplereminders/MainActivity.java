@@ -1,9 +1,11 @@
 package com.charptr0.simplereminders;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,11 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CHANNEL_ID = "Main Channel";
-    private int notification_id = 1;
     private ArrayList<Reminder>listOfReminders = new ArrayList<>();
 
     private TextView noReminderText;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         //init notifications for Android Oreo or higher
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Main Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel channel = new NotificationChannel("Main Channel", "Main Notification", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
@@ -142,22 +143,39 @@ public class MainActivity extends AppCompatActivity {
             //update the adapter and recycler view
             adapter.notifyDataSetChanged();
 
+            setAlarm(r.getName(), r.getWaitTimeSeconds());
+
+            //add the reminder to database
             databaseHelper.addReminder(r);
-            createNotification(r.getName());
         }
 
         if(!listOfReminders.isEmpty()) noReminderText.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * Generate a random integer to represent the pending intent ID
+     * @return a integer
+     */
+    private int generateRandomID() {
+        return new Random().nextInt();
+    }
 
-    private void createNotification(String reminderName)
+    /**
+     * Set schedule notifications
+     * @param reminderName the reminder name
+     * @param seconds how many seconds to wait from the current time
+     */
+    private void setAlarm(String reminderName, int seconds)
     {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
-        builder.setContentTitle("Simple Reminders");
-        builder.setContentText(reminderName);
-        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+        Intent intent = new Intent(this, ReminderBroadcaster.class);
+        intent.putExtra("reminder_name", reminderName);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, generateRandomID(), intent, 0);
 
-        NotificationManagerCompat manager = NotificationManagerCompat.from(MainActivity.this);
-        manager.notify(1, builder.build());
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        long currentTime = System.currentTimeMillis();
+        long waitTime = 1000L * seconds;
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + waitTime, pendingIntent);
     }
 }

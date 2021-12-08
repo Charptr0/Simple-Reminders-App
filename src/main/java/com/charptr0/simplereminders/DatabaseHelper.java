@@ -82,7 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             colIndex = cursor.getColumnIndex(COLUMN_5);
             String reminderID = cursor.getString(colIndex);
 
-            listOfReminders.add(new Reminder(reminderName, reminderPriority, reminderTime, reminderID));
+            listOfReminders.add(new Reminder(reminderName, reminderPriority, reminderTime, reminderID, "0"));
 
             cursor.moveToNext();
         }

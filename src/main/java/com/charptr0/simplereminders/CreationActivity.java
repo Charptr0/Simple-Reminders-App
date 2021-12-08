@@ -22,6 +22,8 @@ public class CreationActivity extends AppCompatActivity
     private AutoCompleteTextView reminderNameView;
     private RadioGroup selectedPriority;
 
+    private int secondsToWait;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +85,8 @@ public class CreationActivity extends AppCompatActivity
                 "1 hour from now",
                 "8 hours from now",
                 "12 hours from now",
-                "1 day from now"};
-
-        //default option to be option 5 (1 hr)
-        int checkedTime = 5;
+                "1 day from now",
+                "1 week from now"};
 
         //dialog button listener
         dialog.setSingleChoiceItems(preSetTimes, 10, new DialogInterface.OnClickListener() {
@@ -98,36 +98,44 @@ public class CreationActivity extends AppCompatActivity
                 switch (which) {
                     case 0:
                         dateAndTime = FutureDateAndTime.getFutureTime(60);
+                        secondsToWait = 60;
                         break;
                     case 1:
                         dateAndTime = FutureDateAndTime.getFutureTime(300);
+                        secondsToWait = 300;
                         break;
                     case 2:
                         dateAndTime = FutureDateAndTime.getFutureTime(600);
+                        secondsToWait = 600;
                         break;
                     case 3:
                         dateAndTime = FutureDateAndTime.getFutureTime(900);
+                        secondsToWait = 900;
                         break;
                     case 4:
                         dateAndTime = FutureDateAndTime.getFutureTime(1800);
+                        secondsToWait = 1800;
                         break;
-
                     case 5:
                         dateAndTime = FutureDateAndTime.getFutureTime(3600);
+                        secondsToWait = 3600;
                         break;
-
                     case 6:
                         dateAndTime = FutureDateAndTime.getFutureTime(28800);
+                        secondsToWait = 28800;
                         break;
-
                     case 7:
                         dateAndTime = FutureDateAndTime.getFutureTime(43200);
+                        secondsToWait = 43200;
                         break;
-
                     case 8:
                         dateAndTime = FutureDateAndTime.getFutureTime(86400);
+                        secondsToWait = 86400;
                         break;
-
+                    case 9:
+                        dateAndTime = FutureDateAndTime.getFutureTime(604800);
+                        secondsToWait = 604800;
+                        break;
                     default:
                         break;
                 }
@@ -213,7 +221,9 @@ public class CreationActivity extends AppCompatActivity
         Intent intent = new Intent();
 
         //create a new reminder with the user inputs
-        intent.putExtra("reminder", new Reminder(reminderName, priorityLevel, reminderTime, String.valueOf(CurrentDateAndTime.getUnixTime())));
+        intent.putExtra("reminder", new Reminder(reminderName, priorityLevel, reminderTime,
+                String.valueOf(CurrentDateAndTime.getUnixTime()), String.valueOf(this.secondsToWait)));
+
         setResult(RESULT_OK, intent);
 
         //destroy the current intent

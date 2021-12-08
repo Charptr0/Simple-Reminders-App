@@ -26,14 +26,25 @@ public class Reminder implements Parcelable {
      */
     private final String TIME;
 
+    /**
+     * Raw unix time will be used to represent the reminder
+     */
     private final long ID;
 
-    public Reminder(String name, String priority_level, String time, String id)
+    /**
+     * Time in seconds needed to wait for the notification to trigger
+     *
+     * Time to notify = ID + this
+     */
+    private final int WAIT_TIME_SECONDS;
+
+    public Reminder(String name, String priority_level, String time, String id, String waitTimeSeconds)
     {
         this.NAME = name;
         this.PRIORITY_LEVEL = priority_level;
         this.TIME = time;
         this.ID = Long.parseLong(id);
+        this.WAIT_TIME_SECONDS = Integer.parseInt(waitTimeSeconds);
     }
 
     protected Reminder(Parcel in) {
@@ -41,6 +52,7 @@ public class Reminder implements Parcelable {
         PRIORITY_LEVEL = in.readString();
         TIME = in.readString();
         ID = in.readLong();
+        WAIT_TIME_SECONDS = in.readInt();
     }
 
     public static final Creator<Reminder> CREATOR = new Creator<Reminder>() {
@@ -79,6 +91,13 @@ public class Reminder implements Parcelable {
         return TIME;
     }
 
+    /**
+     * @return get the wait time
+     */
+    public int getWaitTimeSeconds() {
+        return WAIT_TIME_SECONDS;
+    }
+
     public int getPriorityId()
     {
         switch (this.PRIORITY_LEVEL)
@@ -105,5 +124,6 @@ public class Reminder implements Parcelable {
         dest.writeString(NAME);
         dest.writeString(PRIORITY_LEVEL);
         dest.writeString(TIME);
+        dest.writeInt(WAIT_TIME_SECONDS);
     }
 }
