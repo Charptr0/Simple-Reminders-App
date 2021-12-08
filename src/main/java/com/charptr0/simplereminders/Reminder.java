@@ -124,6 +124,7 @@ public class Reminder implements Parcelable {
         dest.writeString(NAME);
         dest.writeString(PRIORITY_LEVEL);
         dest.writeString(TIME);
+        dest.writeLong(ID);
         dest.writeInt(WAIT_TIME_SECONDS);
     }
 }

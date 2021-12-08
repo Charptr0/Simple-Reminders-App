@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_3 = "time";
     private static final String COLUMN_4 = "priority_id";
     private static final String COLUMN_5 = "time_id";
+    private static final String COLUMN_6 = "wait_time_sec";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, 1);
@@ -31,7 +32,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_2 + " TEXT, " +
                 COLUMN_3 + " TEXT," +
                 COLUMN_4 + " INT, " +
-                COLUMN_5 + " BIGINT)";
+                COLUMN_5 + " BIGINT, " +
+                COLUMN_6 + " INT)";
 
         db.execSQL(createTable);
     }
@@ -82,7 +84,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             colIndex = cursor.getColumnIndex(COLUMN_5);
             String reminderID = cursor.getString(colIndex);
 
-            listOfReminders.add(new Reminder(reminderName, reminderPriority, reminderTime, reminderID, "0"));
+            colIndex = cursor.getColumnIndex(COLUMN_6);
+            String reminderWaitTime = cursor.getString(colIndex);
+
+            listOfReminders.add(new Reminder(reminderName, reminderPriority, reminderTime, reminderID, reminderWaitTime));
 
             cursor.moveToNext();
         }
@@ -112,6 +117,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //raw time (unix time)
         cv.put(COLUMN_5, CurrentDateAndTime.getUnixTime());
+
+        //wait time in seconds
+        cv.put(COLUMN_6, reminder.getWaitTimeSeconds());
 
         long status = db.insert(TABLE_NAME, null, cv);
 

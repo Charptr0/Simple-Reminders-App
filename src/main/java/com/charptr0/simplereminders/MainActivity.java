@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             //update the adapter and recycler view
             adapter.notifyDataSetChanged();
 
-            setAlarm(r.getName(), r.getWaitTimeSeconds());
+            setAlarm(r.getName(), r.getId() * 1000L, r.getWaitTimeSeconds());
 
             //add the reminder to database
             databaseHelper.addReminder(r);
@@ -162,10 +162,10 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Set schedule notifications
-     * @param reminderName the reminder name
-     * @param seconds how many seconds to wait from the current time
+     * @param reminderName the reminder created time in seconds
+     * @param waitTimeSeconds how many seconds to wait from the current time
      */
-    private void setAlarm(String reminderName, int seconds)
+    private void setAlarm(String reminderName, long createdTime, int waitTimeSeconds)
     {
         Intent intent = new Intent(this, ReminderBroadcaster.class);
         intent.putExtra("reminder_name", reminderName);
@@ -173,9 +173,8 @@ public class MainActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        long currentTime = System.currentTimeMillis();
-        long waitTime = 1000L * seconds;
+        long waitTime = 1000L * waitTimeSeconds;
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, currentTime + waitTime, pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, createdTime + waitTime, pendingIntent);
     }
 }
