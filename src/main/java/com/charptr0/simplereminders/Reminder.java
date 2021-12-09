@@ -110,6 +110,10 @@ public class Reminder implements Parcelable {
         return 0;
     }
 
+    /**
+     * Get the id of the reminder
+     * @return the id
+     */
     public long getId() {
         return ID;
     }

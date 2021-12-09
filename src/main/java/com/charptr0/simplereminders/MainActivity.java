@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -175,6 +176,15 @@ public class MainActivity extends AppCompatActivity {
 
         long waitTime = 1000L * waitTimeSeconds;
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, createdTime + waitTime, pendingIntent);
+        // allow the notification to be more precise
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, createdTime + waitTime, pendingIntent);
+        }
+
+        //if the phone has Android version less than M, set a regular schedule notification
+        //these are not very accurate, but still works to an extend
+        else {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, createdTime + waitTime, pendingIntent);
+        }
     }
 }

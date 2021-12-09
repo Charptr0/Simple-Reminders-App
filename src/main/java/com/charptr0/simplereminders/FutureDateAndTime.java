@@ -28,6 +28,20 @@ public class FutureDateAndTime
         return getFutureTimeFormatted(calendar.getTime().toString());
     }
 
+    /**
+     * Calculate the time in seconds needed to wait for a notification
+     * @return seconds needed to wait in order to send a notification
+     */
+    public static long getTimeInBetween(int year, int month, int day, int hr, int min)
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day, hr, min);
+
+        long waitTimeInSeconds = calendar.getTimeInMillis() / 1000L;
+
+        return waitTimeInSeconds - CurrentDateAndTime.getUnixTime();
+    }
+
     private static String getFutureTimeFormatted(String rawTimeAndDate)
     {
         String[] line = rawTimeAndDate.split(" ");

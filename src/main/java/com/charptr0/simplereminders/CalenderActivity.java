@@ -14,10 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+
 /**
+ * The activity that handle for manual input of date and time
  *
  * @author Chenhao Li
- * @version 0.5
+ * @version 1.0
  */
 public class CalenderActivity extends AppCompatActivity
 {
@@ -30,11 +33,14 @@ public class CalenderActivity extends AppCompatActivity
     private final int DEFAULT_HR = 12;
     private final int DEFAULT_MIN = 0;
 
+    private int selectedYear = Calendar.getInstance().get(Calendar.YEAR);
+    private int selectedMonth = Calendar.getInstance().get(Calendar.MONTH);
+    private int selectedDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    private int selectedHour = DEFAULT_HR;
+    private int selectedMinute = DEFAULT_MIN;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        if(BuildConfig.DEBUG)
-            StrictMode.enableDefaults();
-
         super.onCreate(savedInstanceState);
 
         //upon creating intent, set view to be at calender_layout.fxml
@@ -54,10 +60,24 @@ public class CalenderActivity extends AppCompatActivity
 
                 //display the new date to user
                 dateAndTimeText.setText(dateAndTimeTogether);
+
+                selectedYear = year;
+                selectedMonth = month;
+                selectedDay = dayOfMonth;
             }
         });
     }
 
+    /**
+     * Change month from a integer representation to string representation
+     *
+     * 1 -> Jan
+     * 2 -> Feb
+     * ...
+     *
+     * @param month the month as an integer
+     * @return the month as a string
+     */
     private String parseMonth(int month)
     {
         switch (month)
@@ -80,6 +100,12 @@ public class CalenderActivity extends AppCompatActivity
         return "";
     }
 
+    /**
+     * Change the dayOfMonth integer representation to a string representation
+     *
+     * @param dayOfMonth as an integer
+     * @return day of the month as a string, if its < 10, it will be begin with a 0
+     */
     private String parseDatOfMonth(int dayOfMonth)
     {
         if(dayOfMonth < 10) return "0" + String.valueOf(dayOfMonth);
@@ -87,6 +113,9 @@ public class CalenderActivity extends AppCompatActivity
         return String.valueOf(dayOfMonth);
     }
 
+    /**
+     * Display an error dialog when the time entered has already passed
+     */
     private void showInvalidTimeErrDialog()
     {
         new AlertDialog.Builder(this)
@@ -112,6 +141,9 @@ public class CalenderActivity extends AppCompatActivity
 
                 //display the new time to user
                 dateAndTimeText.setText(String.format("%s at %s", dateAsString, timeAsString));
+
+                selectedHour = hourOfDay;
+                selectedMinute = minute;
             }
 
         }, DEFAULT_HR, DEFAULT_MIN, false);
@@ -119,22 +151,34 @@ public class CalenderActivity extends AppCompatActivity
         timePickerDialog.show(); //show the dialog
     }
 
+    /**
+     * Confirm button handler
+     */
     public void onConfirmHandler(View view)
     {
+        //if the date and time is missing, then the user hasnt entered anything
         if(dateAndTimeText.getText().equals(""))
         {
+            //show err
             showInvalidTimeErrDialog();
             return;
         }
 
+        //if time entered has already passed
         if(!CompareTime.isValidDateTime(dateAndTimeText.getText().toString()))
         {
+            //show err
             showInvalidTimeErrDialog();
             return;
         }
 
+        //calculate the wait time in seconds
+        long waitTimeInSeconds = FutureDateAndTime.getTimeInBetween(selectedYear, selectedMonth, selectedDay, selectedHour, selectedMinute);
+
+        //pass data back to creation activity
         Intent intent = new Intent();
         intent.putExtra("date_and_time", (dateAsString + " at " + timeAsString));
+        intent.putExtra("wait_time", waitTimeInSeconds);
         setResult(RESULT_OK, intent);
         finish();
     }

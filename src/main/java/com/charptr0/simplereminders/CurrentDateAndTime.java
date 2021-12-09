@@ -16,7 +16,10 @@ public class CurrentDateAndTime
 
     public static long getUnixTime()
     {
-        return System.currentTimeMillis() / 1000L;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getDefault());
+
+        return calendar.getTimeInMillis() / 1000L;
     }
 
     /**

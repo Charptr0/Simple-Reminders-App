@@ -16,13 +16,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
+/**
+ * Handle the creation of a new reminder
+ *
+ * @author Chenhao Li
+ * @version 2.0
+ */
 public class CreationActivity extends AppCompatActivity
 {
     private TextView dateAndTimeText;
     private AutoCompleteTextView reminderNameView;
     private RadioGroup selectedPriority;
 
-    private int secondsToWait;
+    private long secondsToWait;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +68,10 @@ public class CreationActivity extends AppCompatActivity
 
         if(requestCode == 1 && resultCode == RESULT_OK)
         {
+            assert data != null;
             String text = data.getStringExtra("date_and_time");
+            this.secondsToWait = data.getLongExtra("wait_time", 0);
+
             dateAndTimeText.setText(text);
         }
     }

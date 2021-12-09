@@ -10,10 +10,27 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+/**
+ * Database handler to handle local storage of all tasks
+ *
+ * @author Chenhao Li
+ * @version 1.0
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    /**
+     * The database's path
+     */
     private static final String DB_NAME = "reminders.db";
+
+    /**
+     * The table name
+     */
     private static final String TABLE_NAME = "reminders";
+
+    /**
+     * Column names
+     */
     private static final String COLUMN_1 = "name";
     private static final String COLUMN_2 = "priority_level";
     private static final String COLUMN_3 = "time";
@@ -27,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //if a database DNE, create a new database
         String createTable = "CREATE TABLE " + TABLE_NAME +
                 " (" + COLUMN_1 + " TEXT, " +
                 COLUMN_2 + " TEXT, " +
@@ -43,6 +61,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Delete an entry from the database
+     * @param id special number that is attach for every reminder
+     */
     public void deleteEntry(long id)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -52,6 +74,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Get all reminder that is in local storage
+     * @return a list of all reminders
+     */
     public ArrayList<Reminder> getAll()
     {
         ArrayList<Reminder>listOfReminders = new ArrayList<>();
@@ -61,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(getAllStatement, null);
         cursor.moveToFirst();
 
+        //no reminders exist in the database
         if(cursor.getCount() == 0)
         {
             db.close();
@@ -70,6 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         int colIndex;
 
+        //iterative thru every reminder found and added to the list
         while(!cursor.isAfterLast())
         {
             colIndex = cursor.getColumnIndex(COLUMN_1);
@@ -98,6 +126,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return listOfReminders;
     }
 
+    /**
+     * Add a reminder to the list
+     */
     public boolean addReminder(Reminder reminder)
     {
         SQLiteDatabase db = this.getWritableDatabase();
