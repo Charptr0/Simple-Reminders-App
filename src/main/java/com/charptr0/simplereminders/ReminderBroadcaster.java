@@ -23,7 +23,7 @@ public class ReminderBroadcaster extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "Main Channel");
         builder.setContentTitle("Simple Reminders");
         builder.setContentText(reminderName);
-        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
+        builder.setSmallIcon(R.drawable.ic_notification_img);
 
         //send to user
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
