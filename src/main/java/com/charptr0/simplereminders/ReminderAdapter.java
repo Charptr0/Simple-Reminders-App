@@ -93,12 +93,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
             reminderPriorityLevelTxt.setText(("Priority: " + reminder.getPriorityLevel()));
             reminderTimeTxt.setText(reminder.getTime());
 
-            if(!CompareTime.isValidDateTime(reminder.getTime()))
-            {
-                linearLayout.setBackgroundColor(Color.GRAY);
-                return;
-            }
-
             updateLayoutColor(reminder.getPriorityLevel());
         }
     }
