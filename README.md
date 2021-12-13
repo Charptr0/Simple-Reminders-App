@@ -11,7 +11,7 @@ The application will send a notification when the appropriate time comes.
 This project was created as the final project for the course CSC 221 Software Design.
 
 ## Features
-### Creating a Reminder <img src="https://i.imgur.com/QXzO2GC.gif" width="15%" align="right"> <img src="https://i.imgur.com/dzoEy9y.gif" width="15%" align="right"> <img src="https://i.imgur.com/Ooxccyj.gif" width="15%" align="right"> 
+### Creating a Reminder  <img src="https://i.imgur.com/Ooxccyj.gif" width="15%" align="right"> <img src="https://i.imgur.com/QXzO2GC.gif" width="15%" align="right"> <img src="https://i.imgur.com/dzoEy9y.gif" width="15%" align="right">
 
 - Create a new reminder with button located on the bottom right
 - Give the reminder a name from the input view
@@ -23,14 +23,24 @@ This project was created as the final project for the course CSC 221 Software De
 - If the input view is empty, the name of the reminder will be called “Untitled Reminder”
 - If the time scheduled is in the past, it will display a error dialog
 
-<img src="https://i.imgur.com/lB3TBxW.gif" width="15%" align="right">
+### Deleting a Reminder <img src="https://user-images.githubusercontent.com/70610982/145739900-f796d1f4-f072-4df4-868b-a15e43f6a857.gif" width="15%" align="right"> <img src="https://i.imgur.com/lB3TBxW.gif" width="15%" align="right">
 
-### Deleting a Reminder 
 - Swipe RIGHT on a reminder to remove it from the ArrayList and the database
 - A Toast message will display, confirming the process has been completed successfully
 
-### All Created Reminders are stored in a SQLite Database
+### Reminders are stored in a SQLite Database
+- On startup, all previous reminders stored in the database will be
+  displayed to the home screen
+
+  
+- This ensure that all previous reminders that you have created is
+  not lost once the application restarts.
+
+### Notifications
 Placeholder
 
+<br>
+
 ## Demonstration Video
-Placeholder
+[![Demo Video](https://img.youtube.com/vi/4eiiM8bUsOw/0.jpg)](https://www.youtube.com/watch?v=4eiiM8bUsOw)
+
