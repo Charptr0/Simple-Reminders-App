@@ -1,4 +1,4 @@
-# Simple-Reminders-App <img src="https://i.imgur.com/z4jOIlv.png" width="15%" align="right">
+# Simple Reminders App <img src="https://i.imgur.com/z4jOIlv.png" width="15%" align="right">
 
 ## Overview
 Create a reminder with three simple steps:
@@ -6,9 +6,9 @@ Create a reminder with three simple steps:
 2. Give it a Prority Level
 3. Give it a Time
 
-The application will send a notification when the appropriate time comes. 
+The application will send a notification when the appropriate time comes
 
-This project was created as the final project for the course CSC 221 Software Design.
+This project was created as the final project for the course CSC 221 Software Design
 
 ## Features
 ### Creating a Reminder  <img src="https://i.imgur.com/Ooxccyj.gif" width="15%" align="right"> <img src="https://i.imgur.com/QXzO2GC.gif" width="15%" align="right"> <img src="https://i.imgur.com/dzoEy9y.gif" width="15%" align="right">
@@ -32,14 +32,14 @@ This project was created as the final project for the course CSC 221 Software De
 - On startup, all previous reminders stored in the database will be
   displayed to the home screen
 
-  
 - This ensure that all previous reminders that you have created is
-  not lost once the application restarts.
+  not lost once the application restarts
 
 ### Notifications
-Placeholder
-
-<br>
+- Every reminder you create will have a timer setup in the background, once that
+  timer is up, it will display the notification
+  
+- Example will be in the demonstration video
 
 ## Demonstration Video
 [![Demo Video](https://img.youtube.com/vi/4eiiM8bUsOw/0.jpg)](https://www.youtube.com/watch?v=4eiiM8bUsOw)
